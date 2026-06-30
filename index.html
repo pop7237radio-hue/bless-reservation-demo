@@ -493,7 +493,7 @@
       <div class="stats" aria-label="予約状況">
         <div class="stat"><b id="todayCount">0</b><span>今日</span></div>
         <div class="stat"><b id="selectedCount">0</b><span>選択日</span></div>
-        <div class="stat"><b id="monthCount">0</b><span>31日内</span></div>
+        <div class="stat"><b id="monthCount">0</b><span>3ヶ月内</span></div>
       </div>
     </header>
 
@@ -502,7 +502,7 @@
         <div class="section-head">
           <div>
             <h2 id="calendarTitle">カレンダー</h2>
-            <span class="sub">今日から1ヶ月先まで登録できます</span>
+            <span class="sub">今日から3ヶ月先まで登録できます</span>
           </div>
           <div class="calendar-tools">
             <button class="icon-btn" type="button" id="prevMonth" aria-label="前の月">‹</button>
@@ -582,7 +582,7 @@
   <script>
     const STORAGE_KEY = "beautyReservationDemo.v1";
     const today = stripTime(new Date());
-    const maxDate = addDays(today, 31);
+    const maxDate = addMonths(today, 3);
     const state = {
       selectedDate: toKey(today),
       visibleMonth: new Date(today.getFullYear(), today.getMonth(), 1),
@@ -834,6 +834,12 @@
     function addDays(date, days) {
       const next = new Date(date);
       next.setDate(next.getDate() + days);
+      return stripTime(next);
+    }
+
+    function addMonths(date, months) {
+      const next = new Date(date);
+      next.setMonth(next.getMonth() + months);
       return stripTime(next);
     }
 
